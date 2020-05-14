@@ -1,22 +1,36 @@
 import React from 'react';
+import PropTypes from "prop-types";
 
-function Food({ name, picture }) {
-  return <div>
+function Food({ name, picture, rating }) {
+  return (
+  <div>
     <h2>I like {name}</h2>
-    <img src={picture} />
+    <h4>{rating}/5.0</h4>
+    <img src={picture} alt={name}/>
   </div>
+  );
 }
+
+Food.propTypes = {
+  name: PropTypes.string.isRequired,
+  picture: PropTypes.string.isRequired,
+  rating: PropTypes.number.isRequired
+};
 
 const foodILike = [
   {
+    id: 1,
     name: "Kinchi",
     image:
-      "https://cdn.pixabay.com/photo/2020/05/12/16/24/raspberries-5163812_960_720.jpg"
+      "https://cdn.pixabay.com/photo/2020/05/12/16/24/raspberries-5163812_960_720.jpg",
+    rating: 5
   },
   {
+    id: 2,
     name: "Samgyeopsal",
     image:
-      "https://www.google.com/url?sa=i&url=https%3A%2F%2Fnamu.wiki%2Fw%2F%25EC%2582%25BC%25EA%25B2%25B9%25EC%2582%25B4&psig=AOvVaw3AQd_et32j3apYAy3YeCE_&ust=1589556238323000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCOj_5s7Us-kCFQAAAAAdAAAAABAD"
+      "https://cdn.pixabay.com/photo/2020/05/11/15/14/squirrel-5158715_960_720.jpg",
+      rating: 4
   }
 ];
 
@@ -24,7 +38,7 @@ function App() {
   return (
     <div>
       {foodILike.map(dish => (
-      <Food name={dish.name} picture={dish.image}/>
+      <Food key={dish.id} name={dish.name} picture={dish.image} rating={dish.rating}/>
       ))}
     </div>
   );
